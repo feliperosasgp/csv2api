@@ -1,0 +1,97 @@
+# ── Secrets & credentials ──────────────────────────────────────────────────
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+*.crt
+*.cer
+secrets/
+credentials/
+credentials.json
+service_account.json
+*_credentials.json
+*_secret.json
+token.json
+auth.json
+config.local.*
+
+# ── Python ──────────────────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+.eggs/
+pip-wheel-metadata/
+MANIFEST
+
+# ── Virtual environments ─────────────────────────────────────────────────────
+.venv/
+venv/
+env/
+ENV/
+.python-version
+
+# ── Testing & coverage ───────────────────────────────────────────────────────
+.pytest_cache/
+.coverage
+coverage.xml
+htmlcov/
+.tox/
+nosetests.xml
+test-results/
+
+# ── Type checkers & linters ──────────────────────────────────────────────────
+.mypy_cache/
+.ruff_cache/
+.pytype/
+
+# ── IDEs & editors ───────────────────────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.classpath
+.settings/
+*.sublime-project
+*.sublime-workspace
+
+# ── OS files ─────────────────────────────────────────────────────────────────
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Thumbs.db
+ehthumbs.db
+desktop.ini
+
+# ── Logs & temp files ────────────────────────────────────────────────────────
+*.log
+*.tmp
+*.temp
+*.bak
+*.orig
+
+# ── Data files (never commit real data) ──────────────────────────────────────
+*.csv
+*.xlsx
+*.xls
+!tests/fixtures/*.csv
+!tests/fixtures/*.xlsx
+
+# ── Streamlit ────────────────────────────────────────────────────────────────
+.streamlit/secrets.toml
+
+# ── uv ───────────────────────────────────────────────────────────────────────
+.uv/
+uv.lock
