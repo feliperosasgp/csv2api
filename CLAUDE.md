@@ -186,12 +186,42 @@ La app tiene un flujo lineal en una sola página, con secciones colapsables:
 ## Cómo correr
 
 ```bash
-cd csv-bulk-api-caller
-pip install -r requirements.txt
+uv venv .venv
+source .venv/bin/activate
+uv pip install -r requirements.txt
 streamlit run app.py
 ```
 
 Se abre en `http://localhost:8501`. Listo.
+
+---
+
+## Estado de implementación
+
+La app base está **completa y funcional**. Todos los módulos implementados, 38/38 tests pasando.
+
+### Decisiones técnicas tomadas
+
+- **`use_container_width` deprecado en Streamlit** → usar `width="stretch"` en `st.dataframe` y botones.
+- **Python 3.12** en el entorno actual (compatible con 3.11+ del spec).
+- **`uv`** como package manager (no `pip` directo).
+- **`openpyxl` y `xlrd`** incluidos en requirements para soporte completo de Excel.
+- **`pytest-asyncio`** requerido para los tests async del executor.
+- Los tests de executor usan `AsyncMock` + `patch("httpx.AsyncClient.request")` — no levantan servidor real.
+- El `.gitignore` excluye `*.csv` y `*.xlsx` por defecto para evitar subir datos reales. La excepción es `tests/fixtures/` si se agregan fixtures de prueba.
+
+### Estructura de session_state
+
+| Key | Tipo | Descripción |
+|-----|------|-------------|
+| `file_bytes` | `bytes \| None` | Contenido crudo del archivo subido |
+| `filename` | `str \| None` | Nombre del archivo (para detectar extensión) |
+| `parse_result` | `ParseResult \| None` | Preview de 100 filas + columnas |
+| `execution_result` | `ExecutionResult \| None` | Resultado de la última ejecución |
+| `stop_flag` | `list[bool]` | `[False]` — mutable para pasar por referencia al executor |
+| `is_running` | `bool` | Controla estado de botones Execute/Stop |
+| `live_log` | `list` | Reservado para log en tiempo real |
+| `headers_list` | `list[dict]` | Lista de `{"key": str, "value": str}` para los headers |
 
 ---
 
